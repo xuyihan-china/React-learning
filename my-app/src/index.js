@@ -39,22 +39,22 @@ import * as serviceWorker from './serviceWorker';
 //   ReactDOM.render(<Clock date={new Date().toString()} />, root)
 // }
 // setInterval(run, 1000)
-let crg = 'csg'
-let fsb = 'fjd'
-let element = {
-  backgroundColor:'black',
-  color:'red'
-}
-function Cat() {
-  return (
-    <div>
-      <span>showcase</span>
-      <h2 className={crg + ' red'}>name xyh</h2>
-      <div>{1 + 1}</div>
-      <div style = {element}>{fsb+crg}</div>
-    </div>
-  )
-}
+// let crg = 'csg'
+// let fsb = 'fjd'
+// let element = {
+//   backgroundColor:'black',
+//   color:'red'
+// }
+// function Cat() {
+//   return (
+//     <div>
+//       <span>showcase</span>
+//       <h2 className={crg + ' red'}>name xyh</h2>
+//       <div>{1 + 1}</div>
+//       <div style = {element}>{fsb+crg}</div>
+//     </div>
+//   )
+// }
 // function Dog() {
 //   return (
 //     <div>
@@ -62,6 +62,17 @@ function Cat() {
 //     </div>
 //   )
 // }
-ReactDOM.render(<Cat />, document.querySelector('#root'))
+//ReactDOM.render(<Cat />, document.querySelector('#root'))
 
+//写一个类组件
+let weather = "xiayu"
+let judge = weather == "xiayu" ? "gohone" : "goback"
+class Dog extends React.Component{
+  render(){
+    return(
+      <div>hello world</div>
+    )
+  }
+}
+ReactDOM.render(<Dog/>,document.querySelector('#root'))
 serviceWorker.unregister();
