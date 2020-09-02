@@ -144,33 +144,86 @@ import * as serviceWorker from './serviceWorker';
 // }
 //  ReactDOM.render(<Tab/>,document.querySelector('#root'))
 
-class Like extends React.Component {
-  constructor(props) {
+// class Like extends React.Component {
+//   constructor(props) {
+//     super(props)
+//     this.state = {
+//       tab1: "i like you",
+//       tab2: "you like me"
+//     }
+//     this.cab = this.cab.bind(this)
+//   }
+//   cab(){
+//     console.log('click')
+//     const tab2 = this.state.tab2
+//     this.setState({tab2})
+//   }
+//   render() {
+//     const tab1 = this.state.tab1
+//     const tab2 = this.state.tab2
+//     return (
+//       <div>
+//         <div onClick={this.cab}>{tab1}</div>
+//         <div >{tab2}</div>
+//       </div>
+//     )
+//   }
+// }
+// ReactDOM.render(<Like />, document.querySelector('#root'))
+// function Node(){
+//   return(
+//     <div>
+//       <h2>amb</h2>
+//     </div>
+//   )
+// }
+//let styles={
+
+//}
+// class Like extends React.Component{
+//     constructor(props){
+//       super(props)
+//       this.state={
+//          isLikeMe:false,
+//          isLikeYou:true,
+//          param:"fancy"
+//       }
+//       this.changeData= this.changeData.bind(this)
+//     }
+//     render(){
+//       //解构赋值 接受参数
+//       const {isLikeMe}= this.state
+//       const {isLikeYou} = this.state
+//       const {fancy} = this.state
+//       return(
+//       <div>
+//         <h2 onClick={this.changeData}>{isLikeMe?"love you":"like me"}</h2>
+//         <h3>{isLikeYou?"may":"august"}</h3>
+//         <h3>{fancy}</h3>
+//       </div>
+//       )
+//     }
+//     changeData(){
+//       const isLikeMe =!this.state.isLikeMe
+//       this.setState({isLikeMe})
+//     }
+// }
+// ReactDOM.render(<Like/>,document.querySelector('#root'))
+class DisLike extends React.Component{
+  constructor(props){
     super(props)
-    this.state = {
-      tab1: "i like you",
-      tab2: "you like me"
+    this.state={
+      isLikeMe:false
     }
-    this.cab = this.cab.bind(this)
   }
-  cab(){
-    console.log('click')
-    const tab2 = this.state.tab2
-    this.setState({tab2})
-  }
-  render() {
-    const tab1 = this.state.tab1
-    const tab2 = this.state.tab2
-    return (
+  render(){
+    const isLikeMe = this.state.isLikeMe
+    return(
       <div>
-        <div onClick={this.cab}>{tab1}</div>
-        <div >{tab2}</div>
+        <h2>{isLikeMe}</h2>
       </div>
     )
   }
-  
-  
 }
-
-ReactDOM.render(<Like />, document.querySelector('#root'))
+ReactDOM.render(<DisLike/>,document.querySelector('#root'))
 serviceWorker.unregister();
