@@ -1,1 +1,21 @@
-
+.hh{
+    color: red;
+}
+.container{
+    display: flex;
+    width: 100vw;
+    height: 20vh;
+    overflow: hidden;
+    background: rgb(194, 194, 194);
+    
+}
+#font{
+    font-size: 70px;
+    
+}
+*{
+    margin: 0;
+}
+.right{
+    float:right;
+}
