@@ -3,86 +3,34 @@ import ReactDOM from 'react-dom';
 import './index.css';
 //import App from './App';
 import PropTypes from 'prop-types'
+import axios from 'axios'
 import * as serviceWorker from './serviceWorker';
-class Son extends React.Component{
-    constructor(props){
-        super(props)
-        this.state={
-            newName:'许逸涵',
-            text:''
-        }
-        
+class Repo extends React.Component {
+    state = {
+        RepoName: '',
+        RepoUrl: ''
     }
-    transmit =() =>{
-        const {transmit} = this.props
-        transmit(this.state.newName)
-    }
-    handleChange = (e) =>{
-        let info = e.target.value
-        const {handleChange} = this.props
-        this.setState({
-            text:info
-        })
-        console.log(this.state.text)
-        handleChange(this.state.text)
-    }
-    render(){
-        return(
-            <div>
-                <input type="text" onChange ={this.handleChange}></input>        
-                <button onClick={this.transmit}>改变为许逸涵</button>
-            </div>
+    componentDidMount(){
+        const url = `https://api.github.com/search/users?q=r&&sort=star`
+        axios.get(url).then(
+            (res) =>{
+                const result = res.data
+                console.log(result)
+                const {name,html_url} = result.items[0]
+                this.setState({RepoName:name,RepoUrl:html_url})
+            }
         )
     }
-}
-class Father extends React.Component{
-    constructor(props){
-        super(props)
-        this.props ={
-            name:PropTypes.string.isRequired,
-            Fatext:PropTypes.number.isRequired
+    render() {
+        const { RepoName, RepoUrl } = this.state
+        //应该是表达式 不可以在render中
+        if (!RepoName) {
+            return <h2>Loading</h2>
+        } else {
+            return <h2><a href={RepoUrl}>the most repo is {RepoName}</a></h2>
         }
-        this.state ={
-            name:'fatherName',
-            test:'test',
-            Fatext:'1111'
-        }
-        this.setname = this.setname.bind(this)
-        this.handle = this.handle.bind(this)
     }
-    setname(newName){
-        this.setState({
-            name:newName,
-        })
-    }
-    handle(Fatext){
-        this.setState({
-            Fatext:Fatext
-        })
-    }
-    render(){
-        const {name,test} =this.state
-        return(
-            <div>
-                <h2>{test}</h2>
-                <h2>{name}</h2>
-                <h4>{this.state.Fatext}</h4>
-                <Son transmit = {this.setname} handleChange={this.handle}/>
-            </div>
-        )
-    }
-    
-}
-ReactDOM.render(<Father/>,document.querySelector('#root'))
-serviceWorker.unregister();
-//流程 子组件 传递父祖件 
-//1. 父组件的props 传入值类型 this.propTypes ={} 
-//2. 写一个函数接受子组件的指 如果修改状态那么就setstate  setname(newName)
- // 3.把函数绑定给 子组件 <Son transmit = {this.setname}/>
 
-//1.子组件写一个函数接受父组件的函数  <button onClick={this.transmit}>改变为许逸涵</button>
-//2. 接受props 调用自己 传递值
-// transmit =() =>{
-//     const {transmit} = this.props
-//     transmit(this.state.newName)
-// }
+}
+ReactDOM.render(<Repo />, document.getElementById('root'))
+serviceWorker.unregister();
