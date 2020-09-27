@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 //imrc
 //ccc 快捷键
-import 'antd/dist/antd.css'
-import {Input,Button,List} from 'antd'
+import axios from 'axios'
 import store from './store/index'
-
+import TodoUI from './TodoUI'
 class todo extends Component {
     constructor(props){
         super(props)
@@ -15,39 +14,37 @@ class todo extends Component {
         this.deleteItem=this.deleteItem.bind(this)
         store.subscribe(this.storeChange)
     }
-    
+    componentDidMount(){
+        axios.get('http://easy-mock.com/mock/5cfcce489dc7c36bd6da2c99/xiaojiejie/getList').then((res)=>{
+            const data = res.data
+            const action ={
+                type:'getData',
+                value:data
+            }
+            store.dispatch(action)
+        })
+    }
     render() {
         return (
-            <div>
-                <div>
-                    <Input
-                     placeholder={this.state.inputValue}
-                     style={{width:'250px',marginRight:'10px'}}
-                     onChange={this.changeInputValue}
-                     ></Input>
-                    <Button 
-                        type="primary"
-                        onClick={this.clickBtn}
-                    >哈哈</Button>
-                </div>
-                <div style={{width:'300px',margin:'10px'}}>
-                    <List
-                        bordered
-                        dataSource={this.state.list}
-                        renderItem={(item,index) =>(<List.Item onClick={this.deleteItem.bind(this,index)}>{item}</List.Item>)}
-                    ></List>
-                </div>
-            </div>
+           <TodoUI 
+            inputValue={this.state.inputValue}
+            //onchange 函数
+            changeInputValue={this.changeInputValue}
+            clickBtn={this.clickBtn}
+            list ={this.state.list}
+            dataSource ={this.state.list}
+            deleteItem= {this.deleteItem}
+           />
         );
     }
     changeInputValue(e){
+        console.log('hasChanged')
         //这里进行数据的改变 然后修改redux的值
         //想改变Redux里边State的值就要创建Action了。Action就是一个对象，这个对象一般有两个属性，第一个是对Action的描述，第二个是要改变的值
         const action ={
             type:'changeInputValue',
             value:e.target.value
         }
-        
         store.dispatch(action)
     }
     

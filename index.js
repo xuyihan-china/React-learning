@@ -1,5 +1,15 @@
-import {createStore} from 'redux'
-import reducer from './reducer'
-console.log(reducer)
-const store = createStore(reducer)
-export default store
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import Todo from './todo'
+import * as serviceWorker from './serviceWorker';
+
+ReactDOM.render(
+  <Todo/>,
+  document.getElementById('root')
+);
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
